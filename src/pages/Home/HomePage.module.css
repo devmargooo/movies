@@ -1,0 +1,97 @@
+.logo {
+  height: var(--logo-height);
+  padding: var(--spacing-xl);
+  will-change: filter;
+  transition: filter var(--transition-slow);
+}
+
+.logo:hover {
+  filter: drop-shadow(0 0 2em var(--color-shadow-blue));
+}
+
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em var(--color-shadow-cyan));
+}
+
+@keyframes logoSpin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logoSpin infinite var(--transition-animation) linear;
+  }
+}
+
+.card {
+  padding: var(--spacing-2xl);
+}
+
+.readTheDocs {
+  color: var(--color-text-secondary);
+}
+
+.movieCard {
+  padding: var(--padding-card);
+  margin: var(--padding-card) 0;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition-base) ease;
+}
+
+.movieCardSmall:hover {
+  background: var(--color-bg-card-hover);
+}
+
+.movieCard:active {
+  background: var(--color-bg-card-active);
+}
+
+.movieCardSmall {
+  max-width: var(--movie-card-max-width);
+  max-height: var(--movie-card-max-height);
+}
+
+/* Utility classes for common patterns */
+.cartButtonContainer {
+  position: relative;
+  width: 100%;
+}
+
+.cartButton {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: var(--padding-button-md);
+  cursor: pointer;
+}
+
+.cartList {
+  list-style: none;
+  padding: 0;
+}
+
+.cartItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.deleteButton {
+  padding: var(--padding-button-sm);
+  cursor: pointer;
+  background-color: var(--color-button-danger);
+  color: var(--color-button-danger-text);
+  border: none;
+  border-radius: var(--radius-sm);
+}
+
+.hit {
+  color: var(--color-hit);
+}
