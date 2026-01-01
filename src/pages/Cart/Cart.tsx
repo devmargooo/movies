@@ -1,5 +1,6 @@
+import cn from 'classnames';
 import { useNavigate } from "react-router-dom";
-import "./App.css";
+import styles from "./Cart.module.css";
 import { useCart } from "./CartContext";
 
 export function Cart() {
@@ -13,16 +14,16 @@ export function Cart() {
       {cart.length === 0 ? (
         <p>Корзина пуста</p>
       ) : (
-        <ul className="cart-list">
+        <ul className={styles.cartList}>
           {cart.map((movie) => (
             <li
-              className="movie-card cart-item"
+              className={cn(styles.movieCard, styles.cartItem)}
               key={`${movie.id}-${movie.title}`}
             >
               <span>{movie.title}</span>
               <button
                 onClick={() => removeFromCart(movie.id)}
-                className="delete-button"
+                className={styles.deleteButton}
               >
                 Удалить
               </button>

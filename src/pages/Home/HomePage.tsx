@@ -1,8 +1,8 @@
 import cn from 'classnames';
 import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useCart } from "../../CartContext";
 import { useDebounce } from "../../useDebounce";
+import { useCart } from "../Cart/CartContext";
 import styles from "./HomePage.module.css";
 
 interface IMovie {
@@ -41,27 +41,27 @@ const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
 };
 
 return (
-    <>
-    <div className={styles.cartButtonContainer}>
-        <button
-        onClick={() => navigate("/cart")}
-        className={styles.cartButton}
-        >
-        Корзина
-        </button>
-    </div>
-    <input type="text" onChange={handleSearch} />
-    <div>
-        {movies.map((movie) => (
-        <div
-            className={cn(styles.movieCard, styles.movieCardSmall, movie.hit && styles.hit)}
-            key={`${movie.id}-${movie.title}`}
-            onClick={() => addToCart(movie)}
-        >
-            {movie.title}
+    <div className={styles.container}>
+        <div className={styles.cartButtonContainer}>
+            <button
+            onClick={() => navigate("/cart")}
+            className={styles.cartButton}
+            >
+            Корзина
+            </button>
         </div>
-        ))}
+        <input type="text" onChange={handleSearch} />
+        <div>
+            {movies.map((movie) => (
+            <div
+                className={cn(styles.movieCard, styles.movieCardSmall, movie.hit && styles.hit)}
+                key={`${movie.id}-${movie.title}`}
+                onClick={() => addToCart(movie)}
+            >
+                {movie.title}
+            </div>
+            ))}
+        </div>
     </div>
-    </>
 );
 }

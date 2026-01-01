@@ -1,0 +1,38 @@
+.movieCard {
+  padding: var(--padding-card);
+  margin: var(--padding-card) 0;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition-base) ease;
+  color: var(--color-text-primary);
+}
+
+.movieCardSmall:hover {
+  background: var(--color-bg-card-hover);
+}
+
+.movieCard:active {
+  background: var(--color-bg-card-active);
+}
+
+.cartList {
+  list-style: none;
+  padding: 0;
+}
+
+.cartItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.deleteButton {
+  padding: var(--padding-button-sm);
+  cursor: pointer;
+  background-color: var(--color-button-danger);
+  color: var(--color-button-danger-text);
+  border: none;
+  border-radius: var(--radius-sm);
+}
+
