@@ -1,0 +1,100 @@
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: var(--spacing-lg);
+}
+
+.backButton {
+  margin-bottom: var(--spacing-lg);
+  padding: var(--padding-button-md);
+  cursor: pointer;
+}
+
+.title {
+  margin-bottom: var(--spacing-xl);
+  text-align: center;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.label {
+  font-weight: var(--font-weight-medium);
+  font-size: 1.1em;
+  color: var(--color-text-primary);
+}
+
+.input {
+  padding: var(--spacing-md);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-base);
+  font-family: inherit;
+  background-color: var(--color-bg-secondary);
+  color: var(--color-text-primary);
+  transition: border-color var(--transition-fast);
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--color-border-hover);
+}
+
+.genresContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-md);
+}
+
+.chip {
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border: 1px solid var(--color-border);
+  border-radius: 20px;
+  background-color: var(--color-bg-secondary);
+  color: var(--color-text-primary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  font-size: var(--font-size-base);
+  font-family: inherit;
+}
+
+.chip:hover:not(:disabled) {
+  border-color: var(--color-border-hover);
+  background-color: var(--color-bg-card-hover);
+}
+
+.chipSelected {
+  background-color: var(--color-link);
+  color: white;
+  border-color: var(--color-link);
+  font-weight: var(--font-weight-medium);
+  box-shadow: 0 2px 4px rgba(100, 108, 255, 0.3);
+}
+
+.chipSelected:hover:not(:disabled) {
+  background-color: var(--color-link-hover);
+  border-color: var(--color-link-hover);
+  box-shadow: 0 4px 8px rgba(100, 108, 255, 0.4);
+  transform: translateY(-1px);
+}
+
+.chipDisabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.selectedCount {
+  margin-top: var(--spacing-sm);
+  color: var(--color-text-secondary);
+  font-size: 0.9em;
+}
+

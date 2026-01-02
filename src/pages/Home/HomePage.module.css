@@ -103,8 +103,33 @@
   padding: var(--padding-button-md);
   cursor: pointer;
   flex-shrink: 0;
-  margin-left: 4px;
   background: var(--color-shadow-cyan);
+}
+
+.profileButton {
+  position: fixed;
+  top: var(--spacing-lg);
+  right: var(--spacing-lg);
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 1px solid var(--color-border);
+  background-color: var(--color-bg-secondary);
+  color: var(--color-text-primary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.profileButton:hover {
+  border-color: var(--color-border-hover);
+  background-color: var(--color-bg-card-hover);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .cartList {
