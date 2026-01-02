@@ -60,18 +60,51 @@
   max-height: var(--movie-card-max-height);
 }
 
-/* Utility classes for common patterns */
-.cartButtonContainer {
-  position: relative;
+/* Header styles */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-lg);
+  padding: var(--spacing-md) 0;
+}
+
+.headerSpacer {
+  width: 120px;
+  flex-shrink: 0;
+}
+
+.searchContainer {
+  flex: 1;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.searchInput {
   width: 100%;
+  padding: var(--spacing-md);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-base);
+  font-family: inherit;
+  background-color: var(--color-bg-secondary);
+  color: var(--color-text-primary);
+  transition: border-color var(--transition-fast);
+}
+
+.searchInput:focus {
+  outline: none;
+  border-color: var(--color-border-hover);
 }
 
 .cartButton {
-  position: absolute;
-  top: 0;
-  right: 0;
+  width: 120px;
   padding: var(--padding-button-md);
   cursor: pointer;
+  flex-shrink: 0;
+  margin-left: 4px;
+  background: var(--color-shadow-cyan);
 }
 
 .cartList {
@@ -96,4 +129,32 @@
 
 .hit {
   color: var(--color-hit)!important;
+}
+
+.contentWrapper {
+  display: flex;
+  gap: var(--spacing-lg);
+  align-items: flex-start;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  left: -140px;
+}
+
+.posterContainer {
+  width: 300px;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.moviesList {
+  flex: 1;
+}
+
+.poster {
+  width: 100%;
+  height: 450px;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }

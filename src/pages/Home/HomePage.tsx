@@ -13,6 +13,7 @@ interface IMovie {
   
 export function HomePage() {
 const [movies, setMovies] = useState<IMovie[]>([]);
+const [hoveredMovieId, setHoveredMovieId] = useState<number | null>(null);
 const navigate = useNavigate();
 const { addToCart } = useCart();
 
@@ -42,25 +43,46 @@ const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
 
 return (
     <div className={styles.container}>
-        <div className={styles.cartButtonContainer}>
-            <button
-            onClick={() => navigate("/cart")}
-            className={styles.cartButton}
-            >
-            Корзина
-            </button>
-        </div>
-        <input type="text" onChange={handleSearch} />
-        <div>
-            {movies.map((movie) => (
-            <div
-                className={cn(styles.movieCard, styles.movieCardSmall, movie.hit && styles.hit)}
-                key={`${movie.id}-${movie.title}`}
-                onClick={() => addToCart(movie)}
-            >
-                {movie.title}
+        <header className={styles.header}>
+            <div className={styles.headerSpacer}></div>
+            <div className={styles.searchContainer}>
+                <input 
+                    type="text" 
+                    onChange={handleSearch}
+                    placeholder="Поиск фильмов..."
+                    className={styles.searchInput}
+                />
             </div>
-            ))}
+            <button
+                onClick={() => navigate("/cart")}
+                className={styles.cartButton}
+            >
+                Корзина
+            </button>
+        </header>
+        <div className={styles.contentWrapper}>
+            <div className={styles.posterContainer}>
+                {hoveredMovieId && (
+                    <img 
+                        src={`http://localhost:3030/movie/${hoveredMovieId}/poster`}
+                        alt="Постер фильма"
+                        className={styles.poster}
+                    />
+                )}
+            </div>
+            <div className={styles.moviesList}>
+                {movies.map((movie) => (
+                <div
+                    className={cn(styles.movieCard, styles.movieCardSmall, movie.hit && styles.hit)}
+                    key={`${movie.id}-${movie.title}`}
+                    onClick={() => addToCart(movie)}
+                    onMouseEnter={() => setHoveredMovieId(movie.id)}
+                    onMouseLeave={() => setHoveredMovieId(null)}
+                >
+                    {movie.title}
+                </div>
+                ))}
+            </div>
         </div>
     </div>
 );
