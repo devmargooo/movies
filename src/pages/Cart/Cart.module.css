@@ -27,6 +27,18 @@
   align-items: center;
 }
 
+.movieInfo {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  flex: 1;
+}
+
+.moviePrice {
+  font-weight: var(--font-weight-medium);
+  color: var(--color-link);
+}
+
 .deleteButton {
   padding: var(--padding-button-sm);
   cursor: pointer;
@@ -34,5 +46,55 @@
   color: var(--color-button-danger-text);
   border: none;
   border-radius: var(--radius-sm);
+}
+
+.total {
+  margin-top: var(--spacing-lg);
+  padding: var(--spacing-md);
+  border-top: 1px solid var(--color-border);
+}
+
+.priceRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-sm);
+  font-size: 1em;
+}
+
+.priceRow:last-child {
+  margin-bottom: 0;
+  margin-top: var(--spacing-md);
+  padding-top: var(--spacing-md);
+  border-top: 1px solid var(--color-border);
+  font-size: 1.2em;
+}
+
+.discount {
+  color: var(--color-button-danger);
+  font-weight: var(--font-weight-medium);
+}
+
+.purchaseButton {
+  width: 100%;
+  margin-top: var(--spacing-lg);
+  padding: var(--spacing-md);
+  font-size: 1.1em;
+  font-weight: var(--font-weight-medium);
+  background-color: var(--color-link);
+  color: white;
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: background-color var(--transition-fast);
+}
+
+.purchaseButton:hover:not(:disabled) {
+  background-color: var(--color-link-hover);
+}
+
+.purchaseButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
