@@ -65,6 +65,10 @@
   transition: all var(--transition-fast);
   font-size: var(--font-size-base);
   font-family: inherit;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  position: relative;
 }
 
 .chip:hover:not(:disabled) {
@@ -90,6 +94,29 @@
 .chipDisabled {
   opacity: 0.5;
   cursor: not-allowed;
+}
+
+.chipClose {
+  background: none;
+  border: none;
+  color: inherit;
+  font-size: 1.2em;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.8;
+  transition: opacity var(--transition-fast);
+  margin-left: var(--spacing-xs);
+}
+
+.chipClose:hover {
+  opacity: 1;
+  transform: scale(1.2);
 }
 
 .selectedCount {

@@ -56,17 +56,57 @@ export function Profile() {
     fetchUserData();
   }, []);
 
-  const handleGenreToggle = (genreId: number) => {
-    setSelectedGenres((prev) => {
-      if (prev.includes(genreId)) {
-        return prev.filter((id) => id !== genreId);
+  const handleGenreToggle = async (genreId: number) => {
+    const isSelected = selectedGenres.includes(genreId);
+    
+    if (isSelected) {
+      // Удаление обрабатывается через handleGenreRemove
+      return;
+    }
+    
+    if (selectedGenres.length >= 3) {
+      return;
+    }
+
+    try {
+      const response = await fetch('http://localhost:3030/favorite', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ genre: genreId }),
+      });
+
+      if (response.ok) {
+        setSelectedGenres((prev) => [...prev, genreId]);
       } else {
-        if (prev.length < 3) {
-          return [...prev, genreId];
-        }
-        return prev;
+        console.error('Ошибка добавления жанра');
       }
-    });
+    } catch (error) {
+      console.error('Ошибка добавления жанра:', error);
+    }
+  };
+
+  const handleGenreRemove = async (e: React.MouseEvent, genreId: number) => {
+    e.stopPropagation();
+    
+    try {
+      const response = await fetch('http://localhost:3030/favorite', {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ genre: genreId }),
+      });
+
+      if (response.ok) {
+        setSelectedGenres((prev) => prev.filter((id) => id !== genreId));
+      } else {
+        console.error('Ошибка удаления жанра');
+      }
+    } catch (error) {
+      console.error('Ошибка удаления жанра:', error);
+    }
   };
 
   if (isLoading) {
@@ -119,7 +159,16 @@ export function Profile() {
                   disabled={isDisabled}
                   className={`${styles.chip} ${isSelected ? styles.chipSelected : ''} ${isDisabled ? styles.chipDisabled : ''}`}
                 >
-                  {genre.name}
+                  <span>{genre.name}</span>
+                  {isSelected && (
+                    <button
+                      className={styles.chipClose}
+                      onClick={(e) => handleGenreRemove(e, genre.id)}
+                      aria-label="Удалить жанр"
+                    >
+                      ×
+                    </button>
+                  )}
                 </button>
               );
             })}
