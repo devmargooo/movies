@@ -33,7 +33,14 @@
   color: var(--color-text-primary);
 }
 
+.nameInputContainer {
+  display: flex;
+  gap: var(--spacing-md);
+  align-items: center;
+}
+
 .input {
+  flex: 1;
   padding: var(--spacing-md);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
@@ -47,6 +54,25 @@
 .input:focus {
   outline: none;
   border-color: var(--color-border-hover);
+}
+
+.saveButton {
+  padding: var(--spacing-md) var(--spacing-lg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background-color: var(--color-link);
+  color: white;
+  font-size: var(--font-size-base);
+  font-family: inherit;
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+}
+
+.saveButton:hover {
+  background-color: var(--color-link-hover);
+  border-color: var(--color-link-hover);
 }
 
 .genresContainer {

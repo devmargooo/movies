@@ -109,6 +109,26 @@ export function Profile() {
     }
   };
 
+  const handleSaveName = async () => {
+    try {
+      const response = await fetch('http://localhost:3030/name', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ name }),
+      });
+
+      if (response.ok) {
+        console.log('Имя успешно сохранено');
+      } else {
+        console.error('Ошибка сохранения имени');
+      }
+    } catch (error) {
+      console.error('Ошибка сохранения имени:', error);
+    }
+  };
+
   if (isLoading) {
     return (
       <div className={styles.container}>
@@ -133,14 +153,22 @@ export function Profile() {
           <label htmlFor="name" className={styles.label}>
             Имя
           </label>
-          <input
-            id="name"
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            placeholder="Введите ваше имя"
-            className={styles.input}
-          />
+          <div className={styles.nameInputContainer}>
+            <input
+              id="name"
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="Введите ваше имя"
+              className={styles.input}
+            />
+            <button
+              onClick={handleSaveName}
+              className={styles.saveButton}
+            >
+              Сохранить
+            </button>
+          </div>
         </div>
 
         <div className={styles.field}>
