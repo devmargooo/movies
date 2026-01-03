@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, type ReactNode } from "react";
+import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
 
 interface IMovie {
   title: string;
@@ -21,15 +21,45 @@ export const useCart = () => {
   return context;
 };
 
+const CART_STORAGE_KEY = 'cart';
+
 export const CartProvider = ({ children }: { children: ReactNode }) => {
   const [cart, setCart] = useState<IMovie[]>([]);
 
+  // 🔹 инициализация из localStorage
+  useEffect(() => {
+    const storedCart = localStorage.getItem(CART_STORAGE_KEY);
+    if (storedCart) {
+      try {
+        setCart(JSON.parse(storedCart));
+      } catch {
+        localStorage.removeItem(CART_STORAGE_KEY);
+      }
+    }
+  }, []);
+
   const addToCart = (movie: IMovie) => {
-    setCart((prev) => [...prev, movie]);
+    setCart((prev) => {
+      const updatedCart = [...prev, movie];
+      localStorage.setItem(
+        CART_STORAGE_KEY,
+        JSON.stringify(updatedCart)
+      );
+      return updatedCart;
+    });
   };
 
   const removeFromCart = (movieId: number) => {
-    setCart((prev) => prev.filter((movie) => movie.id !== movieId));
+    setCart((prev) => {
+      const updatedCart = prev.filter(
+        (movie) => movie.id !== movieId
+      );
+      localStorage.setItem(
+        CART_STORAGE_KEY,
+        JSON.stringify(updatedCart)
+      );
+      return updatedCart;
+    });
   };
 
   return (
@@ -38,4 +68,3 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     </CartContext.Provider>
   );
 };
-
