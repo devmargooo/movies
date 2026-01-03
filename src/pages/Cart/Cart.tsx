@@ -22,6 +22,8 @@ export function Cart() {
     if (cart.length === 0) return;
     
     setIsPurchasing(true);
+    const ids = cart.map(movie => movie.id);
+
     try {
       const response = await fetch('http://localhost:3030/purchase', {
         method: 'POST',
@@ -29,7 +31,7 @@ export function Cart() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          ids: cart.map(movie => movie.id),
+          ids,
           amount: finalPrice,
         }),
       });

@@ -5,6 +5,8 @@ import App from './App.tsx'
 import './index.css'
 import { CartProvider } from './pages/Cart/CartContext.tsx'
 
+window.__APP_VERSION__ = "11.01.12"; 
+
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter>
