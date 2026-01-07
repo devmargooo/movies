@@ -1,9 +1,9 @@
 import cn from 'classnames';
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useToast } from "../../hooks/useToast";
-import styles from "./Cart.module.css";
-import { useCart } from "./CartContext";
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useToast } from '../../hooks/useToast';
+import styles from './Cart.module.css';
+import { useCart } from './CartContext';
 
 const MOVIE_PRICE = 10;
 
@@ -12,17 +12,17 @@ export function Cart() {
   const { cart, removeFromCart } = useCart();
   const [isPurchasing, setIsPurchasing] = useState(false);
   const { showToast, ToastComponent } = useToast();
-  
-  const discountPercent = cart.length;
-  const priceBeforeDiscount = cart.length * MOVIE_PRICE;
-  const discountAmount = (priceBeforeDiscount * discountPercent) / 100;
-  const finalPrice = priceBeforeDiscount - discountAmount;
+
+  let discountPercent = cart.length;
+  let priceBeforeDiscount = cart.length * MOVIE_PRICE;
+  let discountAmount = (priceBeforeDiscount * discountPercent) / 100;
+  let finalPrice = priceBeforeDiscount - discountAmount;
 
   const handlePurchase = async () => {
     if (cart.length === 0) return;
-    
+
     setIsPurchasing(true);
-    const ids = cart.map(movie => movie.id);
+    const ids = cart.map((movie) => movie.id);
 
     try {
       const response = await fetch('http://localhost:3030/purchase', {
@@ -38,11 +38,16 @@ export function Cart() {
 
       if (response.ok) {
         // Очистить корзину после успешной покупки
-        cart.forEach(movie => removeFromCart(movie.id));
+        cart.forEach((movie) => removeFromCart(movie.id));
         showToast('Покупка успешно завершена!', 'success');
       } else {
-        const error = await response.json().catch(() => ({ message: 'Неизвестная ошибка' }));
-        showToast(`Ошибка покупки: ${error.message || 'Неизвестная ошибка'}`, 'error');
+        const error = await response
+          .json()
+          .catch(() => ({ message: 'Неизвестная ошибка' }));
+        showToast(
+          `Ошибка покупки: ${error.message || 'Неизвестная ошибка'}`,
+          'error'
+        );
       }
     } catch (error) {
       console.error('Ошибка покупки:', error);
@@ -89,7 +94,9 @@ export function Cart() {
               <>
                 <div className={styles.priceRow}>
                   <span>Скидка ({discountPercent}%):</span>
-                  <span className={styles.discount}>-${discountAmount.toFixed(2)}</span>
+                  <span className={styles.discount}>
+                    -${discountAmount.toFixed(2)}
+                  </span>
                 </div>
               </>
             )}
@@ -110,4 +117,3 @@ export function Cart() {
     </div>
   );
 }
-
